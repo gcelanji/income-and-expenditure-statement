@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_22_125039) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_22_144338) do
   create_table "expenditures", force: :cascade do |t|
-    t.string "type"
+    t.string "name"
     t.string "amount"
     t.integer "i_and_e_statement_id", null: false
     t.datetime "created_at", null: false
@@ -29,7 +29,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_22_125039) do
   end
 
   create_table "incomes", force: :cascade do |t|
-    t.string "type"
+    t.string "name"
     t.string "amount"
     t.integer "i_and_e_statement_id", null: false
     t.datetime "created_at", null: false

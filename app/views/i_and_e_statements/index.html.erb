@@ -1,3 +1,41 @@
 <div class="section">
-  <h2>I&E statements</h2>
+  <div class="d-flex align-items-center justify-content-between mb-4">
+    <h2>I&E statements</h2>
+    <%= link_to "Create", new_i_and_e_statement_path, class: "btn btn-primary" %>
+  </div>
+  <% if @statements.blank? %>
+    <p>You don't have any I&E statements.</p>
+  <% else %>
+    <% @statements.each do |statement| %>
+      <% unless statement.description.blank? %>
+        <p><%= statement.description %></p>
+      <% end %>
+
+      <table class="table w-50">
+        <thead>
+          <tr>
+            <th scope="col">Income</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Expenditure</th>
+            <th scope="col">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% rows = statement.expenditures.count >= statement.incomes.count ? statement.expenditures.count : statement.incomes.count %>
+          <% rows.times do |index| %>
+            <tr>
+              <td><%= statement.incomes[index]&.name %></td>
+              <td><%= statement.incomes[index]&.amount %></td>
+              <td><%= statement.expenditures[index]&.name %></td>
+              <td><%= statement.expenditures[index]&.amount %></td>
+              <td></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <p class="mb-5">
+        <%= link_to "View details", i_and_e_statement_path(statement) %>
+      </p>
+    <% end %>
+  <% end %>
 </div>

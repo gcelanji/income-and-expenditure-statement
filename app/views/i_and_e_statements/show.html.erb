@@ -1,0 +1,32 @@
+<div class="section">
+ <% unless @statement.description.blank? %>
+    <p><%= @statement.description %></p>
+  <% end %>
+  <table class="table mb-5 w-50">
+    <thead>
+      <tr>
+        <th scope="col">Income</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Expenditure</th>
+        <th scope="col">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% rows = @statement.expenditures.count >= @statement.incomes.count ? @statement.expenditures.count : @statement.incomes.count %>
+      <% rows.times do |index| %>
+        <tr>
+          <td><%= @statement.incomes[index]&.name %></td>
+          <td><%= @statement.incomes[index]&.amount %></td>
+          <td><%= @statement.expenditures[index]&.name %></td>
+          <td><%= @statement.expenditures[index]&.amount %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <p>Disposable income: <%= disposable_income(@statement) %></p>
+  <p>Rating: <%= rating(@statement) %></p>
+  <p class="mt-5 mb-5">
+    <%= link_to "Edit", edit_i_and_e_statement_path(@statement) %>
+  </p>
+<div>

@@ -1,0 +1,23 @@
+<%= form_with model: @statement do |f| %>
+  <div class="my-3 w-50">
+      <%= f.text_area :description, rows: 3, class: "form-control shadow rounded", placeholder: "Description" %>
+      <h4 class="mt-4 mb-2">Income</h4>
+      <%= f.fields_for :incomes do |income| %>
+        <div class="mb-1">
+          <%= income.text_field :name, placeholder: "Type" %>
+          <%= income.text_field :amount, placeholder: "Amount" %>
+        </div>
+      <% end %>
+      <h4 class="mt-4 mb-2">Expenditures</h4>
+      <%= f.fields_for :expenditures do |expenditure| %>
+        <div class="mb-1">
+          <%= expenditure.text_field :name, placeholder: "Type" %>
+          <%= expenditure.text_field :amount, placeholder: "Amount" %>
+        </div>
+      <%end %>
+      <div class="d-flex gap-2 mt-4">
+        <%= f.button "Save", class: "btn btn-primary" %>
+        <%= link_to "Cancel", i_and_e_statements_path, class: "btn btn-secondary" %>
+      </div>
+  </div>
+<% end %>
