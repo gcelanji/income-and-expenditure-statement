@@ -1,8 +1,8 @@
 class IAndEStatementsController < ApplicationController
-  before_action :set_statement, only: %i[show]
+  before_action :set_statement, only: %i[show edit update]
 
   def index
-    @statements = current_user.i_and_e_statements
+    @statements = current_user.i_and_e_statements.order(created_at: :desc)
   end
 
   def show
@@ -26,9 +26,11 @@ class IAndEStatementsController < ApplicationController
   end
 
   def update
-  end
-
-  def destroy
+    if @statement.update(statement_params)
+      redirect_to i_and_e_statements_path, notice: "I&E Statement was successfully updated"
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   private

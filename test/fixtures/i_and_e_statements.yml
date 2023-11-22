@@ -6,4 +6,4 @@ one:
 
 two:
   description: MyString
-  user: two
+  user: one
